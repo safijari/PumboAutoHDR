@@ -20,7 +20,7 @@
 #endif
 
 // This uses the enum values defined in "IN_COLOR_SPACE"
-#define DEFAULT_COLOR_SPACE 1
+#define DEFAULT_COLOR_SPACE 2
 
 // We don't default to "Auto" here as if we are upgrading the backbuffer, we'd detect the wrong value
 uniform uint IN_COLOR_SPACE
@@ -38,10 +38,10 @@ uniform float SDR_WHITEPOINT_NITS
   ui_type = "drag";
   ui_tooltip = "Controls how bright the output image is. A value of 80 nits is \"neutral\" (it's the sRGB SDR standard), though for most viewing conditions 203 is a good starting point (ITU reference value).\nLeave at 80 if the source image is already HDR (unless you want to change its brightness)";
   ui_category = "Calibration";
-  ui_min = 1.f;
+  ui_min = 170.f;
   ui_max = 500.f;
   ui_step = 1.f;
-> = sRGB_max_nits;
+> = 170.f;
 
 uniform uint OUT_OF_GAMUT_COLORS_BEHAVIOUR
 <
@@ -79,7 +79,7 @@ uniform float SOURCE_HDR_WHITEPOINT_NITS
   ui_type = "drag";
   ui_tooltip = "What paper white did the HDR source image have? This should be matched with the game paper white HDR calibration setting.\nUse 203 if you can't find out the value from the game. This might be ignored if the source image was SDR";
   ui_category = "Advanced calibration";
-  ui_min = 1.f;
+  ui_min = 170.f;
   ui_max = 500.f;
   ui_step = 1.f;
 > = sRGB_max_nits;
@@ -130,7 +130,7 @@ uniform uint AUTO_HDR_METHOD
   ui_label    = "Auto HDR method";
   ui_type     = "combo";
   ui_items    = "None\0By luminance (color hue conserving) - RECCOMENDED\0By channel average (color hue conserving)\0By channel (increases saturation)\0By max channel (color hue conserving)\0By Oklab lightness (color hue conserving)\0";
-> = 0;
+> = 1;
 
 uniform float AUTO_HDR_SHOULDER_START_ALPHA
 <
@@ -152,7 +152,7 @@ uniform float AUTO_HDR_MAX_NITS
   ui_min = sRGB_max_nits;
   ui_max = 2000.f;
   ui_step = 1.f;
-> = 400.f;
+> = 550.f;
 
 uniform float AUTO_HDR_SHOULDER_POW
 <
